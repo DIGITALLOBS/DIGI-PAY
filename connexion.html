@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DIGI-PAY | Connexion / Inscription</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #0a0f2c, #1e3c72);
+      color: #fff;
+    }
+    header {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    header .logo-text {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+    .form-container {
+      max-width: 400px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .form-container label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    .form-container select, 
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      margin-bottom: 1rem;
+    }
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(45deg, #00f2fe, #4facfe);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .form-container button:hover {
+      opacity: 0.9;
+    }
+    .form-container .create-account {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .form-container .create-account a {
+      color: #00f2fe;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .form-container .create-account a:hover {
+      text-decoration: underline;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      background: linear-gradient(45deg, #00f2fe, #4facfe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+    .success-message {
+      display: none;
+      text-align: center;
+      color: #4CAF50;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+    .error-message {
+      display: none;
+      text-align: center;
+      color: #f44336;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-text">DIGI-PAY</div>
+  </header>
+
+  <div class="form-container">
+    <h2 id="formTitle">Se connecter</h2>
+    <form id="authForm">
+      <label for="loginType">Méthode de connexion</label>
+      <select id="loginType" onchange="toggleLoginFields()">
+        <option value="phone">Numéro de téléphone</option>
+        <option value="email">Email</option>
+      </select>
+
+      <div id="phoneFields">
+        <label for="countryCode">Indicatif pays</label>
+        <select id="countryCode">
+          <option value="+226">Burkina Faso (+226)</option>
+          <option value="+225">Côte d'Ivoire (+225)</option>
+          <option value="+223">Mali (+223)</option>
+          <option value="+221">Sénégal (+221)</option>
+          <option value="+229">Bénin (+229)</option>
+          <option value="+228">Togo (+228)</option>
+          <option value="+227">Niger (+227)</option>
+          <option value="+224">Guinée (+224)</option>
+          <option value="+220">Gambie (+220)</option>
+        </select>
+
+        <label for="phoneNumber">Numéro de téléphone</label>
+        <input type="tel" id="phoneNumber" placeholder="Votre numéro">
+      </div>
+
+      <div id="emailFields" style="display: none;">
+        <label for="email">Adresse email</label>
+        <input type="email" id="email" placeholder="exemple@domaine.com">
+      </div>
+
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" placeholder="Votre mot de passe">
+
+      <div id="confirmPasswordField" style="display: none;">
+        <label for="confirmPassword">Confirmer le mot de passe</label>
+        <input type="password" id="confirmPassword" placeholder="Confirmez votre mot de passe">
+      </div>
+
+      <button type="submit" id="submitBtn">Connexion</button>
+      
+      <div id="successMessage" class="success-message"></div>
+      <div id="errorMessage" class="error-message"></div>
+
+      <div class="create-account">
+        <span id="switchText">Vous n'avez pas de compte ?</span><br>
+        <a id="switchLink" onclick="toggleMode()">Créer un compte</a>
+      </div>
+    </form>
+  </div>
+
+  <section class="hero">
+    <h1>Solutions de paiement sécurisées et rapides</h1>
+    <p>Découvrez la nouvelle façon d'envoyer, recevoir et gérer votre argent.</p>
+  </section>
+
+  <script>
+    let isSignup = false;
+    let registeredUsers = JSON.parse(localStorage.getItem('digipayUsers')) || [];
+
+    function toggleLoginFields() {
+      const type = document.getElementById('loginType').value;
+      if (type === 'phone') {
+        document.getElementById('phoneFields').style.display = 'block';
+        document.getElementById('emailFields').style.display = 'none';
+      } else {
+        document.getElementById('phoneFields').style.display = 'none';
+        document.getElementById('emailFields').style.display = 'block';
+      }
+    }
+
+    function toggleMode() {
+      isSignup = !isSignup;
+      document.getElementById('formTitle').innerText = isSignup ? "S'inscrire" : "Se connecter";
+      document.getElementById('submitBtn').innerText = isSignup ? "S'inscrire" : "Connexion";
+      document.getElementById('switchText').innerText = isSignup ? "Vous avez déjà un compte ?" : "Vous n'avez pas de compte ?";
+      document.getElementById('switchLink').innerText = isSignup ? "Se connecter" : "Créer un compte";
+      document.getElementById('confirmPasswordField').style.display = isSignup ? 'block' : 'none';
+    }
+
+    function showMessage(element, message) {
+      element.textContent = message;
+      element.style.display = 'block';
+      setTimeout(() => {
+        element.style.display = 'none';
+      }, 3000);
+    }
+
+    document.getElementById('authForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const type = document.getElementById('loginType').value;
+      const successMessage = document.getElementById('successMessage');
+      const errorMessage = document.getElementById('errorMessage');
+      let identifier, password, confirmPassword;
+
+      if (type === 'phone') {
+        const countryCode = document.getElementById('countryCode').value;
+        const phoneNumber = document.getElementById('phoneNumber').value.trim();
+        identifier = countryCode + phoneNumber;
+      } else {
+        identifier = document.getElementById('email').value.trim();
+      }
+
+      password = document.getElementById('password').value.trim();
+      
+      if (isSignup) {
+        confirmPassword = document.getElementById('confirmPassword').value.trim();
+        
+        // Validation inscription
+        if (!identifier || !password || !confirmPassword) {
+          showMessage(errorMessage, "Veuillez remplir tous les champs.");
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          showMessage(errorMessage, "Les mots de passe ne correspondent pas.");
+          return;
+        }
+
+        if (password.length < 6) {
+          showMessage(errorMessage, "Le mot de passe doit contenir au moins 6 caractères.");
+          return;
+        }
+
+        // Vérifier si l'utilisateur existe déjà
+        const userExists = registeredUsers.some(user => 
+          type === 'phone' 
+            ? user.phone === identifier 
+            : user.email === identifier
+        );
+
+        if (userExists) {
+          showMessage(errorMessage, type === 'phone' 
+            ? "Ce numéro est déjà enregistré." 
+            : "Cet email est déjà enregistré.");
+          return;
+        }
+
+        // Enregistrer le nouvel utilisateur
+        const newUser = {
+          id: Date.now(),
+          [type === 'phone' ? 'phone' : 'email']: identifier,
+          password: password
+        };
+
+        registeredUsers.push(newUser);
+        localStorage.setItem('digipayUsers', JSON.stringify(registeredUsers));
+
+        showMessage(successMessage, "Inscription réussie ! Redirection vers la connexion...");
+        
+        // Rediriger vers la page de connexion après 2 secondes
+        setTimeout(() => {
+          toggleMode(); // Basculer en mode connexion
+          document.getElementById('password').value = '';
+          if (type === 'phone') {
+            document.getElementById('phoneNumber').value = '';
+          } else {
+            document.getElementById('email').value = '';
+          }
+        }, 2000);
+
+      } else {
+        // Validation connexion
+        if (!identifier || !password) {
+          showMessage(errorMessage, "Veuillez remplir tous les champs.");
+          return;
+        }
+
+        // Vérifier les identifiants
+        const user = registeredUsers.find(user => 
+          (type === 'phone' && user.phone === identifier) || 
+          (type === 'email' && user.email === identifier)
+        );
+
+        if (!user || user.password !== password) {
+          showMessage(errorMessage, "Identifiants incorrects.");
+          return;
+        }
+
+        showMessage(successMessage, "Connexion réussie ! Redirection vers l'accueil...");
+        
+        // Stocker l'utilisateur connecté et rediriger vers l'accueil
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 2000);
+      }
+    });
+
+    // Initialiser les champs
+    toggleLoginFields();
+  </script>
+</body>
+</html>
