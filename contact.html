@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIGI-PAY | Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #00f2fe;
+      --secondary: #4facfe;
+      --dark: #0a0f2c;
+      --light: #f5f6fa;
+      --whatsapp: #25D366;
+      --telegram: #0088cc;
+      --email: #EA4335;
+      --card-bg: rgba(255, 255, 255, 0.05);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0a0f2c, #1e3c72);
+      color: white;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    .contact-header {
+      text-align: center;
+      margin: 4rem 0 3rem;
+    }
+    
+    .contact-header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .contact-header p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .contact-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .contact-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .contact-card p {
+      margin-bottom: 1.5rem;
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 1.8rem;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      gap: 0.8rem;
+      font-size: 1rem;
+    }
+    
+    .btn-whatsapp {
+      background-color: var(--whatsapp);
+      color: white;
+    }
+    
+    .btn-telegram {
+      background-color: var(--telegram);
+      color: white;
+    }
+    
+    .btn-email {
+      background-color: var(--email);
+      color: white;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .contact-form {
+      background: var(--card-bg);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 2.5rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .contact-form h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .contact-form p {
+      margin-bottom: 2rem;
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: white;
+    }
+    
+    .form-group select, 
+    .form-group input, 
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.2);
+      color: white;
+      transition: border 0.3s;
+    }
+    
+    .form-group select:focus, 
+    .form-group input:focus, 
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .request-type {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .request-option {
+      padding: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: rgba(0,0,0,0.1);
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .request-option:hover {
+      border-color: var(--primary);
+      color: white;
+    }
+    
+    .request-option.active {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      border-color: transparent;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.6);
+    }
+    
+    /* Animation et effets */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .request-type {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      nav {
+        display: flex;
+        gap: 1rem;
+      }
+      
+      nav a {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">DIGI-PAY</div>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="produits.html">Produits</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+    </header>
+
+    <section class="contact-header">
+      <h1>DIGI-PAY Support</h1>
+      <p>Notre équipe est disponible 24/7 pour répondre à vos questions et résoudre vos problèmes</p>
+    </section>
+
+    <div class="contact-grid">
+      <div class="contact-methods">
+        <div class="contact-card floating" style="animation-delay: 0.2s;">
+          <h3><i class="fab fa-whatsapp"></i> WhatsApp</h3>
+          <p>Contactez-nous instantanément via WhatsApp pour une réponse rapide </p>
+          <a href="https://wa.me/22665405568" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Ouvrir WhatsApp
+          </a>
+        </div>
+
+        <div class="contact-card floating" style="animation-delay: 0.4s;">
+          <h3><i class="fab fa-telegram"></i> Telegram</h3>
+          <p>Envoyez-nous un message sur Telegram pour un support technique avancé</p>
+          <a href="https://t.me/+22601524820" class="btn btn-telegram">
+            <i class="fab fa-telegram"></i> Ouvrir Telegram
+          </a>
+        </div>
+
+        <div class="contact-card floating" style="animation-delay: 0.6s;">
+          <h3><i class="fas fa-envelope"></i> Email</h3>
+          <p>Envoyez-nous un email détaillé pour les demandes formelles ou complexes</p>
+          <a href="mailto:Digipay226@gmail.com" class="btn btn-email">
+            <i class="fas fa-envelope"></i> Envoyer un Email
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h2>Formulaire </h2>
+        <p>Remplissez ce formulaire et notre équipe  vous répondra dans les plus brefs délais</p>
+        
+        <form id="premiumContactForm">
+          <div class="form-group">
+            <label>Type de requête</label>
+            <div class="request-type" id="requestType">
+              <div class="request-option active" data-value="support">
+                <i class="fas fa-headset"></i> Support
+              </div>
+              <div class="request-option" data-value="technical">
+                <i class="fas fa-cogs"></i> Technique
+              </div>
+              <div class="request-option" data-value="commercial">
+                <i class="fas fa-handshake"></i> Commercial
+              </div>
+            </div>
+            <input type="hidden" id="selectedRequestType" name="requestType" value="support">
+          </div>
+
+          <div class="form-group" id="supportOptions">
+            <label>Sujet de support</label>
+            <select name="supportTopic">
+              <option value="account"><i class="fas fa-user"></i> Problème de compte</option>
+              <option value="payment"><i class="fas fa-money-bill-wave"></i> Problème de paiement</option>
+              <option value="refund"><i class="fas fa-undo"></i> Demande de remboursement</option>
+              <option value="other"><i class="fas fa-question-circle"></i> Autre question</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="technicalOptions" style="display: none;">
+            <label>Sujet technique</label>
+            <select name="technicalTopic">
+              <option value="api"><i class="fas fa-code"></i> Intégration API</option>
+              <option value="bug"><i class="fas fa-bug"></i> Rapport de bug</option>
+              <option value="security"><i class="fas fa-shield-alt"></i> Question de sécurité</option>
+              <option value="feature"><i class="fas fa-lightbulb"></i> Demande de fonctionnalité</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="commercialOptions" style="display: none;">
+            <label>Sujet commercial</label>
+            <select name="commercialTopic">
+              <option value="partnership"><i class="fas fa-users"></i> Demande de partenariat</option>
+              <option value="enterprise"><i class="fas fa-building"></i> Solution entreprise</option>
+              <option value="pricing"><i class="fas fa-tag"></i> Question tarifaire</option>
+              <option value="demo"><i class="fas fa-desktop"></i> Demande de démo</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="name"><i class="fas fa-user"></i> Votre nom complet</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contact"><i class="fas fa-phone-alt"></i> Votre numéro ou email</label>
+            <input type="text" id="contact" name="contact" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message"><i class="fas fa-comment"></i> Détails de votre demande</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i> Envoyer la demande
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 DIGI-PAY. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    // Gestion des types de requêtes
+    const requestOptions = document.querySelectorAll('.request-option');
+    const requestTypeInput = document.getElementById('selectedRequestType');
+    const supportOptions = document.getElementById('supportOptions');
+    const technicalOptions = document.getElementById('technicalOptions');
+    const commercialOptions = document.getElementById('commercialOptions');
+
+    requestOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        // Retirer la classe active de toutes les options
+        requestOptions.forEach(opt => opt.classList.remove('active'));
+        
+        // Ajouter la classe active à l'option cliquée
+        option.classList.add('active');
+        
+        // Mettre à jour la valeur cachée
+        const selectedValue = option.getAttribute('data-value');
+        requestTypeInput.value = selectedValue;
+        
+        // Afficher les options correspondantes
+        supportOptions.style.display = 'none';
+        technicalOptions.style.display = 'none';
+        commercialOptions.style.display = 'none';
+        
+        if (selectedValue === 'support') {
+          supportOptions.style.display = 'block';
+        } else if (selectedValue === 'technical') {
+          technicalOptions.style.display = 'block';
+        } else if (selectedValue === 'commercial') {
+          commercialOptions.style.display = 'block';
+        }
+      });
+    });
+
+    // Gestion de la soumission du formulaire
+    document.getElementById('premiumContactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Simulation d'envoi avec effet premium
+      const submitBtn = this.querySelector('.submit-btn');
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+      submitBtn.disabled = true;
+      
+      setTimeout(() => {
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Envoyé avec succès!';
+        submitBtn.style.background = 'linear-gradient(45deg, #00b894, #55efc4)';
+        
+        // Réinitialiser après 2 secondes
+        setTimeout(() => {
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer la demande premium';
+          submitBtn.style.background = 'linear-gradient(45deg, var(--primary), var(--secondary))';
+          submitBtn.disabled = false;
+          this.reset();
+          requestOptions[0].click();
+        }, 2000);
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
