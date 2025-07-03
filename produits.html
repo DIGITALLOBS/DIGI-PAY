@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DIGI-PAY | Nos espaces</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #00f2fe;
+      --secondary: #4facfe;
+      --dark: #0a0f2c;
+      --light: #f5f6fa;
+      --card-bg: rgba(255, 255, 255, 0.05);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #0a0f2c, #1e3c72);
+      color: white;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    .page-header {
+      text-align: center;
+      margin: 3rem 0;
+    }
+    
+    .page-header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .page-header p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Styles pour les catégories */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .category-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      border-color: var(--primary);
+    }
+    
+    .category-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .category-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    .category-card p {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+    }
+    
+    .items-count {
+      display: inline-block;
+      background: rgba(0,0,0,0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-top: auto;
+    }
+    
+    /* Styles pour la page produit */
+    .product-page {
+      display: none;
+    }
+    
+    .back-button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .product-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .product-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .product-header .product-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .shops-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    
+    .shop-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .shop-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .shop-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--dark);
+    }
+    
+    .shop-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+    
+    .shop-info .location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+    }
+    
+    .product-details {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }
+    
+    .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .availability {
+      color: #4caf50;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+    
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    
+    .contact-btn:hover {
+      transform: translateY(-3px);
+    }
+    
+    .whatsapp { background: #25D366; color: white; }
+    .facebook { background: #1877F2; color: white; }
+    .instagram { background: #E4405F; color: white; }
+    .phone { background: #FF9800; color: white; }
+    .email { background: #9C27B0; color: white; }
+    
+    @media (max-width: 768px) {
+      .categories {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .shops-container {
+        grid-template-columns: 1fr;
+      }
+      
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+      
+      nav {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      nav a {
+        margin-left: 0;
+      }
+      
+      .page-header h1, .product-header h1 {
+        font-size: 2.2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .categories {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-header h1, .product-header h1 {
+        font-size: 2rem;
+      }
+      
+      .page-header p {
+        font-size: 1rem;
+      }
+      
+      .category-card {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">DIGI-PAY</div>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="produits.html" aria-current="page">Produits</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Page Catégories (affichée par défaut) -->
+    <div id="categoriesPage">
+      <section class="page-header">
+        <h1>Nos espaces</h1>
+        <p>Découvrez notre univers lifestyle : vêtements premium, accessoires tendance, appareils high-tech et produits exclusifs, le tout soigneusement sélectionné</p>
+      </section>
+
+      <div class="categories">
+        <!-- Catégorie 1 -->
+        <div class="category-card" data-category="electro" data-product="ordinateur-portable">
+          <div class="category-icon"><i class="fas fa-laptop"></i></div>
+          <h3>Électro</h3>
+          <p>Paiements pour appareils électroniques et gadgets</p>
+          <span class="items-count">10+ items</span>
+        </div>
+        
+        <!-- Catégorie 2 -->
+        <div class="category-card" data-category="fashion" data-product="chemise-homme">
+          <div class="category-icon"><i class="fas fa-tshirt"></i></div>
+          <h3>Mode</h3>
+          <p>Vêtements, accessoires et articles de mode</p>
+          <span class="items-count">12+ items</span>
+        </div>
+        
+        <!-- Catégorie 3 -->
+        <div class="category-card" data-category="phones" data-product="smartphone">
+          <div class="category-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Téléphonie</h3>
+          <p>Smartphones, tablettes et accessoires</p>
+          <span class="items-count">15+ items</span>
+        </div>
+        
+        <!-- Catégorie 4 -->
+        <div class="category-card" data-category="shoes" data-product="baskets-sport">
+          <div class="category-icon"><i class="fas fa-shoe-prints"></i></div>
+          <h3>Chaussures</h3>
+          <p>Chaussures pour tous les styles et occasions</p>
+          <span class="items-count">8+ items</span>
+        </div>
+        
+        <!-- Catégorie 5 -->
+        <div class="category-card" data-category="cosmetics" data-product="creme-hydratante">
+          <div class="category-icon"><i class="fas fa-spa"></i></div>
+          <h3>Cosmétiques</h3>
+          <p>Produits de beauté et soins personnels</p>
+          <span class="items-count">10+ items</span>
+        </div>
+        
+        <!-- Catégorie 6 -->
+        <div class="category-card" data-category="home" data-product="canape">
+          <div class="category-icon"><i class="fas fa-home"></i></div>
+          <h3>Maison</h3>
+          <p>Meubles et articles pour la maison</p>
+          <span class="items-count">9+ items</span>
+        </div>
+        
+        <!-- Catégorie 7 -->
+        <div class="category-card" data-category="sports" data-product="velo-course">
+          <div class="category-icon"><i class="fas fa-running"></i></div>
+          <h3>Sport</h3>
+          <p>Équipements et vêtements de sport</p>
+          <span class="items-count">7+ items</span>
+        </div>
+        
+        <!-- Catégorie 8 -->
+        <div class="category-card" data-category="toys" data-product="poupee">
+          <div class="category-icon"><i class="fas fa-gamepad"></i></div>
+          <h3>Jouets</h3>
+          <p>Jouets et jeux pour tous les âges</p>
+          <span class="items-count">6+ items</span>
+        </div>
+        
+        <!-- Catégorie 9 -->
+        <div class="category-card" data-category="food" data-product="cafe-premium">
+          <div class="category-icon"><i class="fas fa-utensils"></i></div>
+          <h3>Alimentation</h3>
+          <p>Produits alimentaires</p>
+          <span class="items-count">11+ items</span>
+        </div>
+        
+        <!-- Catégorie 10 -->
+        <div class="category-card" data-category="books" data-product="roman">
+          <div class="category-icon"><i class="fas fa-book"></i></div>
+          <h3>Livres</h3>
+          <p>Livres, magazines et articles de papeterie</p>
+          <span class="items-count">5+ items</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Produit (masquée par défaut) -->
+    <div id="productPage" class="product-page">
+      <button class="back-button" id="backButton">
+        <i class="fas fa-arrow-left"></i> Retour
+      </button>
+
+      <div class="product-header">
+        <div class="product-icon" id="productIcon">
+          <i class="fas fa-laptop"></i>
+        </div>
+        <h1 id="productTitle">Ordinateurs Portables</h1>
+        <p>Retrouvez les meilleures boutiques proposant ce produit</p>
+      </div>
+
+      <div class="shops-container" id="shopsContainer">
+        <!-- Les boutiques seront ajoutées dynamiquement ici -->
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 DIGI-PAY. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    // Données des boutiques par produit
+    const productsData = {
+      // Électronique
+      "ordinateur-portable": {
+        icon: "laptop",
+        shops: [
+          {
+            name: "TechZone",
+            logo: "TZ",
+            location: "Ouagadougou, Secteur 15",
+            price: "450,000 FCFA",
+            stock: "5 disponibles",
+            description: "Marques disponibles : Dell, HP, Lenovo. Garantie 1 an incluse.",
+            contacts: [
+              { type: "whatsapp", label: "WhatsApp" },
+              { type: "facebook", label: "Facebook" },
+              { type: "phone", label: "Appeler" }
+            ]
+          },
+          {
+            name: "Digital Market",
+            logo: "DM",
+            location: "Bobo-Dioulasso, Av. de la Nation",
+            price: "420,000 FCFA",
+            stock: "3 disponibles",
+            description: "Modèles gaming disponibles. Service après-vente sur place.",
+            contacts: [
+              { type: "instagram", label: "Instagram" },
+              { type: "email", label: "Email" },
+              { type: "phone", label: "Appeler" }
+            ]
+          },
+          {
+            name: "ElectroTech",
+            logo: "ET",
+            location: "Ouagadougou, Avenue Kwame Nkrumah",
+            price: "490,000 FCFA",
+            stock: "7 disponibles",
+            description: "Grand choix de marques premium. Livraison gratuite possible.",
+            contacts: [
+              { type: "whatsapp", label: "WhatsApp" },
+              { type: "facebook", label: "Facebook" }
+            ]
+          },
+          {
+            name: "Computer Gallery",
+            logo: "CG",
+            location: "Ouagadougou, Rue de la Commerce",
+            price: "380,000 FCFA",
+            stock: "2 disponibles",
+            description: "Modèles d'entrée de gamme. Paiement en plusieurs fois possible.",
+            contacts: [
+              { type: "phone", label: "Appeler" },
+              { type: "email", label: "Email" }
+            ]
+          },
+          {
+            name: "IT World",
+            logo: "ITW",
+            location: "Ouagadougou, Secteur 10",
+            price: "520,000 FCFA",
+            stock: "4 disponibles",
+            description: "Ordinateurs haut de gamme. Configurations personnalisables.",
+            contacts: [
+              { type: "whatsapp", label: "WhatsApp" },
+              { type: "instagram", label: "Instagram" },
+              { type: "phone", label: "Appeler" }
+            ]
+          }
+        ]
+      },
+      // Mode
+      "chemise-homme": {
+        icon: "tshirt",
+        shops: [
+          {
+            name: "Fashion House",
+            logo: "FH",
+            location: "Ouagadougou, Avenue de la Nation",
+            price: "25,000 FCFA",
+            stock: "10 disponibles",
+            description: "Chemises en coton de qualité. Plusieurs couleurs disponibles.",
+            contacts: [
+              { type: "whatsapp", label: "WhatsApp" },
+              { type: "instagram", label: "Instagram" }
+            ]
+          },
+          // ... autres boutiques pour chemise-homme
+        ]
+      },
+      // ... autres produits avec leurs boutiques
+    };
+
+    // Icônes correspondantes aux catégories
+    const categoryIcons = {
+      electro: "laptop",
+      fashion: "tshirt",
+      phones: "mobile-alt",
+      shoes: "shoe-prints",
+      cosmetics: "spa",
+      home: "home",
+      sports: "running",
+      toys: "gamepad",
+      food: "utensils",
+      books: "book"
+    };
+
+    // Gestion des clics sur les cartes de catégorie
+    document.querySelectorAll('.category-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const productId = this.getAttribute('data-product');
+        showProductPage(productId);
+      });
+    });
+
+    // Bouton retour
+    document.getElementById('backButton').addEventListener('click', function() {
+      document.getElementById('categoriesPage').style.display = 'block';
+      document.getElementById('productPage').style.display = 'none';
+    });
+
+    // Afficher la page produit
+    function showProductPage(productId) {
+      const productData = productsData[productId];
+      
+      if (!productData) {
+        alert("Produit non trouvé");
+        return;
+      }
+
+      // Mettre à jour l'en-tête du produit
+      document.getElementById('productTitle').textContent = 
+        productId.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+      document.getElementById('productIcon').innerHTML = 
+        `<i class="fas fa-${productData.icon}"></i>`;
+      
+      // Remplir les boutiques
+      const shopsContainer = document.getElementById('shopsContainer');
+      shopsContainer.innerHTML = '';
+      
+      productData.shops.forEach(shop => {
+        const shopCard = document.createElement('div');
+        shopCard.className = 'shop-card';
+        
+        let contactsHTML = '';
+        shop.contacts.forEach(contact => {
+          contactsHTML += `
+            <button class="contact-btn ${contact.type}" 
+                    onclick="contactShop('${shop.name}', '${productId}', '${contact.type}')">
+              <i class="fab fa-${contact.type === 'phone' ? 'phone' : contact.type === 'email' ? 'envelope' : contact.type}"></i> 
+              ${contact.label}
+            </button>
+          `;
+        });
+        
+        shopCard.innerHTML = `
+          <div class="shop-header">
+            <div class="shop-logo">${shop.logo}</div>
+            <div class="shop-info">
+              <h3>${shop.name}</h3>
+              <div class="location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>${shop.location}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="product-details">
+            <div class="price">${shop.price}</div>
+            <div class="availability">
+              <i class="fas fa-check-circle"></i>
+              <span>En stock (${shop.stock})</span>
+            </div>
+            <p>${shop.description}</p>
+          </div>
+          
+          <div class="contact-methods">
+            ${contactsHTML}
+          </div>
+        `;
+        
+        shopsContainer.appendChild(shopCard);
+      });
+      
+      // Afficher la page produit
+      document.getElementById('categoriesPage').style.display = 'none';
+      document.getElementById('productPage').style.display = 'block';
+    }
+
+    // Contacter une boutique
+    window.contactShop = function(shopName, productName, contactType) {
+      const productTitle = document.getElementById('productTitle').textContent;
+      let url = '';
+      
+      switch(contactType) {
+        case 'whatsapp':
+          url = `https://wa.me/22670123456?text=Bonjour ${shopName}, je suis intéressé par ${productTitle}`;
+          break;
+        case 'facebook':
+          url = `https://m.me/${shopName.toLowerCase().replace(/\s/g, '')}`;
+          break;
+        case 'instagram':
+          url = `https://www.instagram.com/${shopName.toLowerCase().replace(/\s/g, '')}`;
+          break;
+        case 'phone':
+          url = `tel:+22670123456`;
+          break;
+        case 'email':
+          url = `mailto:contact@${shopName.toLowerCase().replace(/\s/g, '')}.com?subject=Demande pour ${productTitle}`;
+          break;
+      }
+      
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
